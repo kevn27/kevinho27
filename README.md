@@ -1,5 +1,5 @@
-Blog personal de Portafolio de estudiante de Desarrollador 😊
+Blog personal de Portafolio de estudiante de Desarrollador (Kevin Hernández Barrantes) 😊
 
-Sientance libres de brindar su comentario y sugerencia.
+Sientanse libres de brindar su comentarios y sugerencia.
 
 Saludos y que estén muy bien!
