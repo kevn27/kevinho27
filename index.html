@@ -9,11 +9,29 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:wght@300;400;500;600;700&display=swap'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+html {scroll-behavior: smooth;}
 html,body {font-family: "Poppins", sans-serif; letter-spacing: 0.2px;}
 h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-spacing: 0.3px;}
 .profile-name {font-size: 28px; font-weight: 700; margin: 14px 0 2px 0; color: #222;}
 .profile-tagline {font-size: 15px; font-weight: 400; color: #009688; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;}
-.skill-tag {display:inline-block; margin:4px 6px 4px 0; font-weight: 500;}
+
+.skill-tag {display:inline-block; margin:4px 6px 4px 0; font-weight: 500; transition: transform .2s ease, box-shadow .2s ease;}
+.skill-tag:hover {transform: scale(1.08); box-shadow: 0 3px 10px rgba(0,150,136,0.35); cursor: default;}
+
+.fade-section {opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease;}
+.fade-section.visible {opacity: 1; transform: translateY(0);}
+
+.hover-card {transition: transform .25s ease, box-shadow .25s ease;}
+.hover-card:hover {transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;}
+
+.skill-bar-fill {width: 0% !important; transition: width 1.4s cubic-bezier(.22,1,.36,1);}
+
+.profile-avatar {overflow: hidden;}
+.profile-avatar img {transition: transform .5s ease;}
+.profile-avatar:hover img {transform: scale(1.06);}
+
+footer i {transition: transform .25s ease;}
+footer i:hover {transform: translateY(-4px) scale(1.15);}
 </style>
 </head>
 <body class="w3-light-grey">
@@ -27,8 +45,10 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
     <!-- Left Column -->
     <div class="w3-third">
 
-      <div class="w3-white w3-text-grey w3-card-4">
-        <img src="KevinHernandez4.JPG" style="width:100%" alt="Avatar">
+      <div class="w3-white w3-text-grey w3-card-4 hover-card fade-section">
+        <div class="profile-avatar">
+          <img src="KevinHernandez4.JPG" style="width:100%" alt="Avatar">
+        </div>
         <div class="w3-container w3-center">
           <div class="profile-name">Kevin Hernández</div>
           <div class="profile-tagline">Aprendiendo a Programar</div>
@@ -42,21 +62,21 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
 
           <p>Python</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:60%">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal skill-bar-fill" data-width="60%">
               <div class="w3-center w3-text-white">60%</div>
             </div>
           </div>
 
           <p>SQL</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal skill-bar-fill" data-width="50%">
               <div class="w3-center w3-text-white">50%</div>
             </div>
           </div>
 
           <p>C#</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:25%">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal skill-bar-fill" data-width="25%">
               <div class="w3-center w3-text-white">25%</div>
             </div>
           </div>
@@ -65,11 +85,11 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
           <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Idiomas</b></p>
           <p>Español</p>
           <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+            <div class="w3-round-xlarge w3-teal skill-bar-fill" data-width="100%" style="height:24px"></div>
           </div>
           <p>Inglés</p>
           <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
+            <div class="w3-round-xlarge w3-teal skill-bar-fill" data-width="55%" style="height:24px"></div>
           </div>
           <br>
         </div>
@@ -81,7 +101,7 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
     <!-- Right Column -->
     <div class="w3-twothird">
 
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
+      <div class="w3-container w3-card w3-white w3-margin-bottom hover-card fade-section">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Sobre mí</h2>
         <div class="w3-container">
           <p>¡Hola! Soy Kevin, y actualmente estoy aprendiendo a programar por mi cuenta.
@@ -91,7 +111,7 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
         </div>
       </div>
 
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
+      <div class="w3-container w3-card w3-white w3-margin-bottom hover-card fade-section">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Lo que estoy aprendiendo</h2>
 
         <div class="w3-container">
@@ -129,7 +149,7 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
         </div>
       </div>
 
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
+      <div class="w3-container w3-card w3-white w3-margin-bottom hover-card fade-section">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-folder-open fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Proyectos</h2>
         <div class="w3-container">
           <h5 class="w3-opacity"><b>Ejercicios de Python</b></h5>
@@ -152,7 +172,7 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
         </div>
       </div>
 
-      <div class="w3-container w3-card w3-white">
+      <div class="w3-container w3-card w3-white hover-card fade-section">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Recursos y autoestudio</h2>
         <div class="w3-container">
           <h5 class="w3-opacity"><b>Cursos y tutoriales en línea</b></h5>
@@ -178,6 +198,24 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
   <i class="fa fa-instagram w3-hover-opacity"></i>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
+
+<script>
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        entry.target.querySelectorAll('.skill-bar-fill').forEach(function (bar) {
+          bar.style.width = bar.dataset.width;
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-section').forEach(function (section) {
+    observer.observe(section);
+  });
+</script>
 
 </body>
 </html>
