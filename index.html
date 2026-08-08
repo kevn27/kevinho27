@@ -24,7 +24,13 @@ h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif; font-weight: 600; letter-
 .hover-card {transition: transform .25s ease, box-shadow .25s ease;}
 .hover-card:hover {transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;}
 
-.skill-bar-fill {width: 0% !important; transition: width 1.4s cubic-bezier(.22,1,.36,1);}
+.skill-row {display: flex; justify-content: space-between; align-items: baseline; margin: 16px 0 6px;}
+.skill-name {font-weight: 500; color: #455a64;}
+.skill-pct {font-size: 13px; font-weight: 600; color: #00897b;}
+.skill-track {background: #eceff1; border-radius: 999px; height: 10px; overflow: hidden;}
+.skill-bar-fill {width: 0; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, #26a69a, #00796b);
+  transition: width 1.4s cubic-bezier(.22,1,.36,1);}
 
 .profile-avatar {overflow: hidden;}
 .profile-avatar img {transition: transform .5s ease;}
@@ -60,37 +66,23 @@ footer i:hover {transform: translateY(-4px) scale(1.15);}
 
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>En camino de aprendizaje</b></p>
 
-          <p>Python</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal skill-bar-fill" data-width="60%">
-              <div class="w3-center w3-text-white">60%</div>
-            </div>
-          </div>
+          <div class="skill-row"><span class="skill-name">Python</span><span class="skill-pct">60%</span></div>
+          <div class="skill-track"><div class="skill-bar-fill" data-width="60%"></div></div>
 
-          <p>SQL</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal skill-bar-fill" data-width="50%">
-              <div class="w3-center w3-text-white">50%</div>
-            </div>
-          </div>
+          <div class="skill-row"><span class="skill-name">SQL</span><span class="skill-pct">50%</span></div>
+          <div class="skill-track"><div class="skill-bar-fill" data-width="50%"></div></div>
 
-          <p>C#</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal skill-bar-fill" data-width="25%">
-              <div class="w3-center w3-text-white">25%</div>
-            </div>
-          </div>
+          <div class="skill-row"><span class="skill-name">C#</span><span class="skill-pct">25%</span></div>
+          <div class="skill-track"><div class="skill-bar-fill" data-width="25%"></div></div>
           <br>
 
           <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Idiomas</b></p>
-          <p>Español</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal skill-bar-fill" data-width="100%" style="height:24px"></div>
-          </div>
-          <p>Inglés</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal skill-bar-fill" data-width="55%" style="height:24px"></div>
-          </div>
+
+          <div class="skill-row"><span class="skill-name">Español</span><span class="skill-pct">Nativo</span></div>
+          <div class="skill-track"><div class="skill-bar-fill" data-width="100%"></div></div>
+
+          <div class="skill-row"><span class="skill-name">Inglés</span><span class="skill-pct">Intermedio</span></div>
+          <div class="skill-track"><div class="skill-bar-fill" data-width="55%"></div></div>
           <br>
         </div>
       </div><br>
@@ -200,21 +192,31 @@ footer i:hover {transform: translateY(-4px) scale(1.15);}
 </footer>
 
 <script>
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        entry.target.querySelectorAll('.skill-bar-fill').forEach(function (bar) {
-          bar.style.width = bar.dataset.width;
-        });
-        observer.unobserve(entry.target);
-      }
+  function reveal(section) {
+    section.classList.add('visible');
+    section.querySelectorAll('.skill-bar-fill').forEach(function (bar) {
+      bar.style.width = bar.dataset.width;
     });
-  }, { threshold: 0.15 });
+  }
 
-  document.querySelectorAll('.fade-section').forEach(function (section) {
-    observer.observe(section);
-  });
+  var sections = document.querySelectorAll('.fade-section');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          reveal(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+  } else {
+    sections.forEach(reveal);
+  }
 </script>
 
 </body>
